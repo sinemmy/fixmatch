@@ -33,17 +33,17 @@ from tqdm import trange
 from libml import data as libml_data
 from libml.utils import EasyDict
 
-# URLS = {
-#     'svhn': 'http://ufldl.stanford.edu/housenumbers/{}_32x32.mat',
-#     'cifar10': 'https://www.cs.toronto.edu/~kriz/cifar-10-matlab.tar.gz',
-#     'cifar100': 'https://www.cs.toronto.edu/~kriz/cifar-100-matlab.tar.gz',
-#     'stl10': 'http://ai.stanford.edu/~acoates/stl10/stl10_binary.tar.gz',
-# }
-
-# This is two datasets (GB total)! Will need to split this up into the oct and chestxray
 URLS = {
-    'tomo', 'https://md-datasets-cache-zipfiles-prod.s3.eu-west-1.amazonaws.com/rscbjbr9sj-3.zip'
+    'svhn': 'http://ufldl.stanford.edu/housenumbers/{}_32x32.mat',
+    'cifar10': 'https://www.cs.toronto.edu/~kriz/cifar-10-matlab.tar.gz',
+    'cifar100': 'https://www.cs.toronto.edu/~kriz/cifar-100-matlab.tar.gz',
+    'stl10': 'http://ai.stanford.edu/~acoates/stl10/stl10_binary.tar.gz',
 }
+
+# This is two datasets (8 GB total)! Will need to split this up into the oct and chestxray
+# URLS = {
+#     'tomo', 'https://md-datasets-cache-zipfiles-prod.s3.eu-west-1.amazonaws.com/rscbjbr9sj-3.zip'
+# }
 
 
 def _encode_png(images):
