@@ -10,6 +10,7 @@ export PYTHONPATH='.:$PYTHONPATH'
 
 # donwload cifar dataset
 echo -e "\n Downloading ciphar dataset \n"
+./scripts/create_datasets.py
 scripts/create_unlabeled.py $ML_DATA/SSL2/cifar10 $ML_DATA/cifar10-train.tfrecord
 
 # Create semi-supervised subsets
