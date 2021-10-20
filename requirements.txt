@@ -2,7 +2,7 @@ absl-py
 easydict
 cython
 numpy
-tensorflow-gpu==2.5.1
+tensorflow
 tqdm
 scipy
 pillow
