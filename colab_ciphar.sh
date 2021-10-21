@@ -5,7 +5,7 @@ sudo apt install python3-dev python3-virtualenv python3-tk imagemagick
 pip install -r requirements.txt
 
 #export environment variables
-export MLDATA='data'
+export ML_DATA='data'
 export PYTHONPATH='.:$PYTHONPATH'
 
 # donwload cifar dataset
