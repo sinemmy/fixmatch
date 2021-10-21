@@ -78,8 +78,8 @@ def _load_stl10():
                             [0, 3, 2, 1])
 
     with tempfile.NamedTemporaryFile() as f:
-        if tf.gfile.Exists('stl10/stl10_binary.tar.gz'):
-            f = tf.gfile.Open('stl10/stl10_binary.tar.gz', 'rb')
+        if tf.io.gfile.Exists('stl10/stl10_binary.tar.gz'):
+            f = tf.io.gfile.Open('stl10/stl10_binary.tar.gz', 'rb')
         else:
             request.urlretrieve(URLS['stl10'], f.name)
         tar = tarfile.open(fileobj=f)
@@ -207,7 +207,7 @@ def _save_as_tfrecord(data, filename):
 def _is_installed(name, checksums):
     for subset, checksum in checksums.items():
         filename = os.path.join(libml_data.DATA_DIR, '%s-%s.tfrecord' % (name, subset))
-        if not tf.gfile.Exists(filename):
+        if not tf.io.gfile.Exists(filename):
             return False
     return True
 
@@ -215,14 +215,14 @@ def _is_installed(name, checksums):
 def _save_files(files, *args, **kwargs):
     del args, kwargs
     for folder in frozenset(os.path.dirname(x) for x in files):
-        tf.gfile.MakeDirs(os.path.join(libml_data.DATA_DIR, folder))
+        tf.io.gfile.MakeDirs(os.path.join(libml_data.DATA_DIR, folder))
     for filename, contents in files.items():
-        with tf.gfile.Open(os.path.join(libml_data.DATA_DIR, filename), 'w') as f:
+        with tf.io.gfile.Open(os.path.join(libml_data.DATA_DIR, filename), 'w') as f:
             f.write(contents)
 
 
 def _is_installed_folder(name, folder):
-    return tf.gfile.Exists(os.path.join(libml_data.DATA_DIR, name, folder))
+    return tf.io.gfile.Exists(os.path.join(libml_data.DATA_DIR, name, folder))
 
 
 CONFIGS = dict(
@@ -238,7 +238,7 @@ def main(argv):
         subset = set(argv[1:])
     else:
         subset = set(CONFIGS.keys())
-    tf.gfile.MakeDirs(libml_data.DATA_DIR)
+    tf.io.gfile.MakeDirs(libml_data.DATA_DIR)
     for name, config in CONFIGS.items():
         if name not in subset:
             continue
@@ -255,12 +255,12 @@ def main(argv):
         for sub_name, data in datas.items():
             if sub_name == 'readme':
                 filename = os.path.join(libml_data.DATA_DIR, '%s-%s.txt' % (name, sub_name))
-                with tf.gfile.Open(filename, 'w') as f:
+                with tf.io.gfile.Open(filename, 'w') as f:
                     f.write(data)
             elif sub_name == 'files':
                 for file_and_data in data:
                     path = os.path.join(libml_data.DATA_DIR, file_and_data.filename)
-                    with tf.gfile.Open(path, "wb") as f:
+                    with tf.io.gfile.Open(path, "wb") as f:
                         f.write(file_and_data.data)
             else:
                 saver(data, '%s-%s' % (name, sub_name))
