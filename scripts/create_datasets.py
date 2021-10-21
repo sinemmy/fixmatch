@@ -238,7 +238,7 @@ def main(argv):
         subset = set(argv[1:])
     else:
         subset = set(CONFIGS.keys())
-    tf.io.gfile.MakeDirs(libml_data.DATA_DIR)
+    tf.io.gfile.makedirs(libml_data.DATA_DIR)
     for name, config in CONFIGS.items():
         if name not in subset:
             continue
