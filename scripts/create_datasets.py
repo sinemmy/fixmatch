@@ -78,7 +78,7 @@ def _load_stl10():
                             [0, 3, 2, 1])
 
     with tempfile.NamedTemporaryFile() as f:
-        if tf.io.gfile.Exists('stl10/stl10_binary.tar.gz'):
+        if tf.io.gfile.exists('stl10/stl10_binary.tar.gz'):
             f = tf.io.gfile.Open('stl10/stl10_binary.tar.gz', 'rb')
         else:
             request.urlretrieve(URLS['stl10'], f.name)
@@ -207,7 +207,7 @@ def _save_as_tfrecord(data, filename):
 def _is_installed(name, checksums):
     for subset, checksum in checksums.items():
         filename = os.path.join(libml_data.DATA_DIR, '%s-%s.tfrecord' % (name, subset))
-        if not tf.io.gfile.Exists(filename):
+        if not tf.io.gfile.exists(filename):
             return False
     return True
 
@@ -215,14 +215,14 @@ def _is_installed(name, checksums):
 def _save_files(files, *args, **kwargs):
     del args, kwargs
     for folder in frozenset(os.path.dirname(x) for x in files):
-        tf.io.gfile.MakeDirs(os.path.join(libml_data.DATA_DIR, folder))
+        tf.io.gfile.makedirs(os.path.join(libml_data.DATA_DIR, folder))
     for filename, contents in files.items():
         with tf.io.gfile.Open(os.path.join(libml_data.DATA_DIR, filename), 'w') as f:
             f.write(contents)
 
 
 def _is_installed_folder(name, folder):
-    return tf.io.gfile.Exists(os.path.join(libml_data.DATA_DIR, name, folder))
+    return tf.io.gfile.exists(os.path.join(libml_data.DATA_DIR, name, folder))
 
 
 CONFIGS = dict(
